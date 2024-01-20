@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.model.Issue;
 import ru.gb.model.Reader;
-import ru.gb.repository.ReaderRepository;
 import ru.gb.service.ReaderService;
 
 import java.util.List;

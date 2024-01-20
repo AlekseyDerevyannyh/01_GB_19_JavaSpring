@@ -26,15 +26,6 @@ public class IssueRepository {
                 .orElse(null);
     }
 
-//    public Boolean isIssuesContainReaderById(long id) {
-//        for (Issue issue : issues) {
-//            if (issue.getReaderId() == id) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public int getCountBooksByReader(long readerId) {
         int count = 0;
         for (Issue issue : issues) {

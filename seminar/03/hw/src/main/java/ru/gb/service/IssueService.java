@@ -28,12 +28,6 @@ public class IssueService {
         if (readerRepository.getReaderById(request.getReaderId()) == null) {
             throw new NoSuchElementException("Не найден читатель с идентификатором \"" + request.getReaderId() + "\"");
         }
-        // можно проверить, что у читателя нет книг на руках (или его лимит не превышает в Х книг)
-//        if (issueRepository.isIssuesContainReaderById(request.getReaderId())) {
-//            throw new IllegalArgumentException("У читателя с идентификатором \"" +
-//                    request.getReaderId() + "\" уже есть книга");
-//        }
-
         if (issueRepository.getCountBooksByReader(request.getReaderId()) >= maxAllowedBooks) {
             throw new IllegalArgumentException("У читателя с идентификатором \"" +
                     request.getReaderId() + "\" уже есть максимально допустимое число книг (" +
