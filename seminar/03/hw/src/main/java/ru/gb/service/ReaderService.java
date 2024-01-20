@@ -36,10 +36,9 @@ public class ReaderService {
         readerRepository.deleteReader(id);
     }
 
-    public Issue getIssueByReaderId(long id) {
+    public List<Issue> getIssuesByReaderId(long id) {
         return issueRepository.getIssues().stream()
                 .filter(issue -> issue.getReaderId() == id)
-                .findFirst()
-                .orElse(null);
+                .toList();
     }
 }

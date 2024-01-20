@@ -38,6 +38,14 @@ public class IssueController {
         return ResponseEntity.status(HttpStatus.CREATED).body(issue);
     }
 
+    @PutMapping("/{issueId}")
+    public ResponseEntity<Void> returnBook(@PathVariable long issueId) {
+        if (service.returnBook(issueId)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Issue> getIssue(@PathVariable long id) {
         Issue issue = service.getIssueById(id);

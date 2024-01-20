@@ -26,16 +26,35 @@ public class IssueRepository {
                 .orElse(null);
     }
 
-    public Boolean isIssuesContainReaderById(long id) {
+//    public Boolean isIssuesContainReaderById(long id) {
+//        for (Issue issue : issues) {
+//            if (issue.getReaderId() == id) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    public int getCountBooksByReader(long readerId) {
+        int count = 0;
         for (Issue issue : issues) {
-            if (issue.getReaderId() == id) {
-                return true;
+            if (issue.getReaderId() == readerId) {
+                count++;
             }
         }
-        return false;
+        return count;
     }
 
     public List<Issue> getIssues() {
         return issues;
+    }
+
+    public Boolean returnBook(long issueId) {
+        for (Issue issue : issues) {
+            if (issue.getId() == issueId) {
+                return issue.returnBook();
+            }
+        }
+        return false;
     }
 }

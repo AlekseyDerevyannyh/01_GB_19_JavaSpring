@@ -37,10 +37,10 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}/issue")
-    public ResponseEntity<Issue> getIssueByReaderId(@PathVariable long id) {
-        Issue issue = service.getIssueByReaderId(id);
-        if (issue != null) {
-            return new ResponseEntity<>(issue, HttpStatus.OK);
+    public ResponseEntity<List<Issue>> getIssueByReaderId(@PathVariable long id) {
+        List<Issue> issues = service.getIssuesByReaderId(id);
+        if (issues.isEmpty()) {
+            return new ResponseEntity<>(issues, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -1,6 +1,7 @@
 package ru.gb.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.gb.model.IssueRequest;
 import ru.gb.model.Issue;
@@ -17,6 +18,9 @@ public class IssueService {
     private final ReaderRepository readerRepository;
     private final IssueRepository issueRepository;
 
+    @Value("${application.max-allowed-books:1}")
+    private int maxAllowedBooks;
+
     public Issue issue(IssueRequest request) {
         if (bookRepository.getBookById(request.getBookId()) == null) {
             throw new NoSuchElementException("Не найдена книга с идентификатором \"" + request.getBookId() + "\"");
@@ -25,9 +29,15 @@ public class IssueService {
             throw new NoSuchElementException("Не найден читатель с идентификатором \"" + request.getReaderId() + "\"");
         }
         // можно проверить, что у читателя нет книг на руках (или его лимит не превышает в Х книг)
-        if (issueRepository.isIssuesContainReaderById(request.getReaderId())) {
+//        if (issueRepository.isIssuesContainReaderById(request.getReaderId())) {
+//            throw new IllegalArgumentException("У читателя с идентификатором \"" +
+//                    request.getReaderId() + "\" уже есть книга");
+//        }
+
+        if (issueRepository.getCountBooksByReader(request.getReaderId()) >= maxAllowedBooks) {
             throw new IllegalArgumentException("У читателя с идентификатором \"" +
-                    request.getReaderId() + "\" уже есть книга");
+                    request.getReaderId() + "\" уже есть максимально допустимое число книг (" +
+                    maxAllowedBooks + ")");
         }
 
         Issue issue = new Issue(request.getBookId(), request.getReaderId());
@@ -37,5 +47,9 @@ public class IssueService {
 
     public Issue getIssueById(long id) {
         return issueRepository.getIssueById(id);
+    }
+
+    public Boolean returnBook(long issueId) {
+        return issueRepository.returnBook(issueId);
     }
 }
