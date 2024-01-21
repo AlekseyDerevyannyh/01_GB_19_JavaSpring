@@ -2,11 +2,14 @@ package ru.gb.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.gb.model.Book;
 import ru.gb.model.Issue;
 import ru.gb.model.Reader;
+import ru.gb.repository.BookRepository;
 import ru.gb.repository.IssueRepository;
 import ru.gb.repository.ReaderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,6 +18,7 @@ import java.util.NoSuchElementException;
 public class ReaderService {
     private final ReaderRepository readerRepository;
     private final IssueRepository issueRepository;
+    private final BookRepository bookRepository;
 
     public List<Reader> getAllReaders() {
         return readerRepository.getAllReaders();
@@ -40,5 +44,15 @@ public class ReaderService {
         return issueRepository.getIssues().stream()
                 .filter(issue -> issue.getReaderId() == id)
                 .toList();
+    }
+
+    public List<Book> getBooksByReaderId(long id) {
+        List<Book> result = new ArrayList<>();
+        for (Issue issue : issueRepository.getIssues()) {
+            if (issue.getReaderId() == id) {
+                result.add(bookRepository.getBookById(issue.getBookId()));
+            }
+        }
+        return result;
     }
 }

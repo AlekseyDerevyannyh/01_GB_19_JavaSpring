@@ -17,7 +17,7 @@
 tmp/
 target/
 .idea/
-resources/
+# resources/
 # webapp/
 # examples/
 # out/
