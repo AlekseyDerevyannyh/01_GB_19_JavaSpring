@@ -1,20 +1,21 @@
 package ru.gb.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
+@Entity
+@Table(name = "readers")
 @Data
 public class Reader {
-    private static long sequence = 1L;
-
-    private final long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(nullable = false)
     private String name;
 
     public Reader() {
-        this.id = sequence++;
     }
     public Reader(String name) {
-        this();
         this.name = name;
     }
 }

@@ -1,5 +1,6 @@
 package ru.gb.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -7,21 +8,32 @@ import java.time.LocalDateTime;
 /**
  * Запись о факте выдачи книги (в БД)
  */
+@Entity
+@Table(name = "issues")
 @Data
 public class Issue {
-    private static long sequence = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private final long id;
-    private final long bookId;
-    private final long readerId;
+    @Column(nullable = false)
+    private Long bookId;
+
+    @Column(nullable = false)
+    private Long readerId;
     /**
      * Дата выдачи
      */
-    private final LocalDateTime issuedAt;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime issuedAt;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime returnedAt;
 
+    public Issue() {
+    }
+
     public Issue(long bookId, long readerId) {
-        this.id = sequence++;
         this.bookId = bookId;
         this.readerId = readerId;
         this.issuedAt = LocalDateTime.now();

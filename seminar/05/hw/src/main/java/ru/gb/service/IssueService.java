@@ -26,39 +26,47 @@ public class IssueService {
     private int maxAllowedBooks;
 
     public Issue issue(IssueRequest request) {
-        if (bookRepository.getBookById(request.getBookId()) == null) {
+        if (bookRepository.findById(request.getBookId()).orElse(null) == null) {
             throw new NoSuchElementException("Не найдена книга с идентификатором \"" + request.getBookId() + "\"");
         }
-        if (readerRepository.getReaderById(request.getReaderId()) == null) {
+        if (readerRepository.findById(request.getReaderId()).orElse(null) == null) {
             throw new NoSuchElementException("Не найден читатель с идентификатором \"" + request.getReaderId() + "\"");
         }
-        if (issueRepository.getCountBooksByReader(request.getReaderId()) >= maxAllowedBooks) {
+        if (issueRepository.countBooksByReaderId(request.getReaderId()) >= maxAllowedBooks) {
             throw new IllegalArgumentException("У читателя с идентификатором \"" +
                     request.getReaderId() + "\" уже есть максимально допустимое число книг (" +
                     maxAllowedBooks + ")");
         }
 
         Issue issue = new Issue(request.getBookId(), request.getReaderId());
-        issueRepository.save(issue);
-        return issue;
+        return issueRepository.save(issue);
     }
 
-    public Issue getIssueById(long id) {
-        return issueRepository.getIssueById(id);
+    public Issue getIssueById(Long id) {
+        return issueRepository.findById(id).orElse(null);
     }
 
-    public Boolean returnBook(long issueId) {
-        return issueRepository.returnBook(issueId);
+    public Boolean returnBook(Long issueId) {
+        for (Issue issue : issueRepository.findAll()) {
+            if (issue.getId().equals(issueId)) {
+                Boolean returnBookState = issue.returnBook();
+                issueRepository.save(issue);
+                return returnBookState;
+            }
+        }
+        return false;
+//        Book existingBook = bookRepository.getBookById()
+//        return issueRepository.returnBook(issueId);
     }
 
     public List<String[]> getAllIssuesToStringArray() {
         List<String[]> result = new ArrayList<>();
         String[] issueArray;
-        for (Issue issue : issueRepository.getIssues()) {
+        for (Issue issue : issueRepository.findAll()) {
             issueArray = new String[5];
             issueArray[0] = String.valueOf(issue.getId());
-            for (Book book : bookRepository.getAllBooks()) {
-                if (issue.getBookId() == book.getId()) {
+            for (Book book : bookRepository.findAll()) {
+                if (issue.getBookId().equals(book.getId())) {
                     issueArray[1] = book.getName();
                     break;
                 }
@@ -66,8 +74,8 @@ public class IssueService {
             if (issueArray[1].isEmpty()) {
                 issueArray[1] = String.valueOf(issue.getBookId());
             }
-            for (Reader reader : readerRepository.getAllReaders()) {
-                if (issue.getReaderId() == reader.getId()) {
+            for (Reader reader : readerRepository.findAll()) {
+                if (issue.getReaderId().equals(reader.getId())) {
                     issueArray[2] = reader.getName();
                     break;
                 }

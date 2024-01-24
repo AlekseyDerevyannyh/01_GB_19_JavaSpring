@@ -1,19 +1,23 @@
 package ru.gb.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
+@Entity
+@Table(name = "books")
 @Data
 public class Book {
-    private static long sequence = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private final long id;
+    @Column(nullable = false)
     private String name;
 
     public Book() {
-        this.id = sequence++;
     }
+
     public Book(String name) {
-        this();
         this.name = name;
     }
 }

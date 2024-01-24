@@ -1,5 +1,6 @@
 package ru.gb.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.model.Book;
@@ -13,12 +14,19 @@ import java.util.NoSuchElementException;
 public class BookService {
     private final BookRepository bookRepository;
 
-    public List<Book> getAllBooks() {
-        return bookRepository.getAllBooks();
+    @PostConstruct
+    public void generateData() {
+        bookRepository.save(new Book("война и мир"));
+        bookRepository.save(new Book("мёртвые души"));
+        bookRepository.save(new Book("чистый код"));
     }
 
-    public Book getBookById(long id) {
-        Book book = bookRepository.getBookById(id);
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
+
+    public Book getBookById(Long id) {
+        Book book = bookRepository.findById(id).orElse(null);
         if (book == null) {
             throw new NoSuchElementException("Не найдена книга с идентификатором \"" + id + "\"");
         }
@@ -26,10 +34,10 @@ public class BookService {
     }
 
     public Book addBook(Book book) {
-        return bookRepository.addBook(book);
+        return bookRepository.save(book);
     }
 
-    public void deleteBook(long id) {
-        bookRepository.deleteBook(id);
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
     }
 }
