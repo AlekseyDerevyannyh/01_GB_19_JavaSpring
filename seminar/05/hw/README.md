@@ -6,9 +6,23 @@
 * **
 ### Примечание:
 
-Исходники в папке **/src/main/java/ru/gb/**
+Исходники в папке **./src/main/java/ru/gb/**
 
 Запуск приложения осуществляется из файла **Application.java**
+
+В качестве БД использовалась PostgreSQL, запущенная на сервере в локальной сети. БД была запущена в Docker контейнере, для этого был создан Dockerfile со следующим содержимым:
+```bash
+FROM postgres:13.2-alpine
+ENV POSTGRES_DB library
+ENV POSTGRES_USER library
+ENV POSTGRES_PASSWORD secret
+```
+Для создания и запуска контейнера с БД вводим в терминале сервера следующие команды:
+```bash
+docker build -t library-db .
+docker run --name library-db -p 5432:5432 -d library-db
+```
+Соответствующие параметры подключения приложения к БД были прописаны в файле **./src/main/resources/application.yml**
 
 ### Условие задачи:
 ```java

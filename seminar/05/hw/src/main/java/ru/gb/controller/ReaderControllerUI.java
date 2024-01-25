@@ -25,7 +25,7 @@ public class ReaderControllerUI {
     }
 
     @GetMapping("/reader/{id}")
-    public String getReaderBooks(@PathVariable long id, Model model) {
+    public String getReaderBooks(@PathVariable Long id, Model model) {
         try {
             model.addAttribute("reader", service.getReaderById(id));
         } catch (NoSuchElementException e) {

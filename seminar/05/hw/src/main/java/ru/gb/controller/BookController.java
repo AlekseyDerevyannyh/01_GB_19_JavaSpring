@@ -23,7 +23,7 @@ public class BookController {
         return new ResponseEntity<>(service.getAllBooks(), HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable long id) {
+    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         Book book;
         try {
             book = service.getBookById(id);
@@ -39,7 +39,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable long id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         service.deleteBook(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

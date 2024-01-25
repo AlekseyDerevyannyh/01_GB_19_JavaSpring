@@ -11,10 +11,10 @@ public class IssueRequest {
     /**
      * Идентификатор читателя
      */
-    private long readerId;
+    private Long readerId;
 
     /**
      * Идентификатор книги
      */
-    private long bookId;
+    private Long bookId;
 }

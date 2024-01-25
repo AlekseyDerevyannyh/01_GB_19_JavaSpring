@@ -25,7 +25,7 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reader> getReaderById(@PathVariable long id) {
+    public ResponseEntity<Reader> getReaderById(@PathVariable Long id) {
         Reader reader;
         try {
             reader = service.getReaderById(id);
@@ -36,9 +36,9 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}/issue")
-    public ResponseEntity<List<Issue>> getIssueByReaderId(@PathVariable long id) {
+    public ResponseEntity<List<Issue>> getIssueByReaderId(@PathVariable Long id) {
         List<Issue> issues = service.getIssuesByReaderId(id);
-        if (issues.isEmpty()) {
+        if (!issues.isEmpty()) {
             return new ResponseEntity<>(issues, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,7 +50,7 @@ public class ReaderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReader(@PathVariable long id) {
+    public ResponseEntity<Void> deleteReader(@PathVariable Long id) {
         service.deleteReader(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
