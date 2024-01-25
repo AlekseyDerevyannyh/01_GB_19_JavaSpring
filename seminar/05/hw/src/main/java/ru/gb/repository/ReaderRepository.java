@@ -8,8 +8,4 @@ import java.util.List;
 
 @Repository
 public interface ReaderRepository extends JpaRepository<Reader, Long> {
-//    List<Reader> getAllReaders();
-//    Reader getReaderById(Long id);
-//    Reader addReader(Reader reader);
-//    void deleteReader(Long id);
 }

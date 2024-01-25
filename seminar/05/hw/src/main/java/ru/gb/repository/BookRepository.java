@@ -8,8 +8,4 @@ import java.util.List;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-//    List<Book> getAll();
-//    Book getBookById(Long id);
-//    Book addBook(Book book);
-//    void deleteBook(Long id);
 }

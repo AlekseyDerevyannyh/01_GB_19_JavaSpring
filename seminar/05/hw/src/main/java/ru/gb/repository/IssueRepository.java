@@ -8,8 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Long> {
-//    List<Issue> getAllIssues();
-//    Issue getIssueById(Long id);
-//    Issue addIssue(Issue issue);
     Long countBooksByReaderId(Long readerId);
 }

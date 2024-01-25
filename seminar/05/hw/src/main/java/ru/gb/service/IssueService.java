@@ -55,8 +55,6 @@ public class IssueService {
             }
         }
         return false;
-//        Book existingBook = bookRepository.getBookById()
-//        return issueRepository.returnBook(issueId);
     }
 
     public List<String[]> getAllIssuesToStringArray() {
