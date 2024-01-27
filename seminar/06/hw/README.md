@@ -23,7 +23,13 @@ docker build -t library-db .
 docker run --name library-db -p 5432:5432 -d library-db
 ```
 Соответствующие параметры подключения приложения к БД были прописаны в файле **./src/main/resources/application.yml**
+* **
+### Скриншоты работы swagger
+![screen 1](./screen1.png)
 
+![screen 2](./screen2.png)
+
+* **
 ### Условие задачи:
 1. Подключить OpenAPI 3 и swagger к проекту с библиотекой
 2. Описать все контроллеры, эндпоинты и возвращаемые тела с помощью аннотаций OpenAPI 3

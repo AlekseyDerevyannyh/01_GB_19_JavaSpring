@@ -1,5 +1,7 @@
 package ru.gb.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/reader")
+@Tag(name = "Reader controller")
 public class ReaderController {
     private final ReaderService service;
 
@@ -20,11 +23,13 @@ public class ReaderController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all readers", description = "Загружает список всех читателей")
     public ResponseEntity<List<Reader>> getAllReaders() {
         return new ResponseEntity<>(service.getAllReaders(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get reader by id", description = "Загружает информацию о читателе по его идентификатору")
     public ResponseEntity<Reader> getReaderById(@PathVariable Long id) {
         Reader reader;
         try {
@@ -36,6 +41,7 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}/issue")
+    @Operation(summary = "Get issue by reader id", description = "Загружает список всех выдач для читателя по его идентификатору")
     public ResponseEntity<List<Issue>> getIssueByReaderId(@PathVariable Long id) {
         List<Issue> issues = service.getIssuesByReaderId(id);
         if (!issues.isEmpty()) {
@@ -45,11 +51,13 @@ public class ReaderController {
     }
 
     @PostMapping
+    @Operation(summary = "Add reader", description = "Добавляет нового читателя")
     public ResponseEntity<Reader> addReader(@RequestBody Reader reader) {
         return new ResponseEntity<>(service.addReader(reader), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete reader", description = "Удаляет читателя по его идентификатору")
     public ResponseEntity<Void> deleteReader(@PathVariable Long id) {
         service.deleteReader(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
