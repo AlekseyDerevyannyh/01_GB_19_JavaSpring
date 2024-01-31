@@ -1,5 +1,6 @@
 package ru.gb.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class IssueService {
     private final BookRepository bookRepository;
     private final ReaderRepository readerRepository;
     private final IssueRepository issueRepository;
+
+    @PostConstruct
+    public void generateData() {
+        issueRepository.save(new Issue(1L, 1L));
+    }
 
     @Value("${application.max-allowed-books:1}")
     private int maxAllowedBooks;

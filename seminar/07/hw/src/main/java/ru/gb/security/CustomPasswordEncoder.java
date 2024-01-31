@@ -1,15 +1,17 @@
 package ru.gb.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {
-        return null;
+        return String.valueOf(rawPassword);
     }
 
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return rawPassword.equals(encodedPassword);
+        return encode(rawPassword).equals(encodedPassword);
     }
 }
