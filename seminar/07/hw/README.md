@@ -24,6 +24,7 @@ docker run --name library-db -p 5432:5432 -d library-db
 ```
 Соответствующие параметры подключения приложения к БД были прописаны в файле **./src/main/resources/application.yml**
 
+Данные о пользователях и их ролях для доступа к ресурсам загружаются в БД из файла **./src/main/java/ru/gb/repository/DataLoader.java**
 
 * **
 ### Условие задачи:

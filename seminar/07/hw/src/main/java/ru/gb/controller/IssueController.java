@@ -11,6 +11,7 @@ import ru.gb.model.Issue;
 import ru.gb.model.IssueRequest;
 import ru.gb.service.IssueService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -54,5 +55,11 @@ public class IssueController {
             return new ResponseEntity<>(issue, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping
+    @Operation(summary = "Get all issues", description = "Загружает информацию о всех выдачах")
+    public ResponseEntity<List<Issue>> getAllIssues() {
+        return new ResponseEntity<>(service.getAllIssues(), HttpStatus.OK);
     }
 }

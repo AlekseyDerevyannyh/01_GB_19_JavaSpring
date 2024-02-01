@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import ru.gb.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -19,9 +20,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         ru.gb.model.User user = userService.getUserByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
-        return new User(user.getName(), user.getPassword(), List.of(
-                new SimpleGrantedAuthority("admin"),
-                new SimpleGrantedAuthority("reader")
-        ));
+        return new User(user.getName(), user.getPassword(), user.getRoles());
     }
 }

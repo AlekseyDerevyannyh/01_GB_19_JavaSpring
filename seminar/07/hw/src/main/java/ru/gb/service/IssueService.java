@@ -26,6 +26,7 @@ public class IssueService {
     @PostConstruct
     public void generateData() {
         issueRepository.save(new Issue(1L, 1L));
+        issueRepository.save(new Issue(2L, 1L));
     }
 
     @Value("${application.max-allowed-books:1}")
@@ -96,5 +97,9 @@ public class IssueService {
             result.add(issueArray);
         }
         return result;
+    }
+
+    public List<Issue> getAllIssues() {
+        return issueRepository.findAll();
     }
 }
