@@ -1,6 +1,5 @@
 package ru.gb.service;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.model.Role;
