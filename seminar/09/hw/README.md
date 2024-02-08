@@ -6,9 +6,9 @@
 * **
 ### Примечание:
 
-Исходники в папке **./src/main/java/ru/gb/**
+Скриншот страницы **./eureka/apps/**
 
-Запуск приложения осуществляется из файла **Application.java**
+![screenshot](./screenshot.png "screenshot")
 
 * **
 ### Условие задачи:

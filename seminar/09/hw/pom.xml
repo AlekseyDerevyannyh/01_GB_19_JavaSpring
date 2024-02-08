@@ -17,6 +17,9 @@
     <modules>
         <module>book-service</module>
         <module>api</module>
+        <module>issue-service</module>
+        <module>discovery-service</module>
+        <module>reader-service</module>
     </modules>
     <properties>
         <java.version>21</java.version>
