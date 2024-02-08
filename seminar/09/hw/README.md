@@ -6,9 +6,13 @@
 * **
 ### Примечание:
 
-Скриншот страницы **./eureka/apps/**
+Скриншот страницы **/eureka/apps/**
 
 ![screenshot](./screenshot.png "screenshot")
+
+Скриншот страницы **/api/issue/** сервиса **issue-service**
+
+![screenshot1](./screenshot1.png "screenshot1")
 
 * **
 ### Условие задачи:

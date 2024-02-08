@@ -9,6 +9,6 @@ import java.util.UUID;
 public class Issue {
     private UUID id;
     private LocalDate issuedAt;
-    private UUID bookId;
-    private UUID readerId;
+    private Book book;
+    private Reader reader;
 }
