@@ -2,6 +2,7 @@ package ru.gb.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
 
 import java.util.ArrayList;
 import java.util.List;
