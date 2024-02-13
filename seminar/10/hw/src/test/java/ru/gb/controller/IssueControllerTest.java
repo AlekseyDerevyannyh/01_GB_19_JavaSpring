@@ -180,14 +180,11 @@ public class IssueControllerTest extends TestSpringBootBase {
         }
         TestIssueSave request = new TestIssueSave(bookRepository.findAll().get(maxAllowedBooks).getId(), readerId);
 
-        Issue responseBody = webTestClient.post()
+        webTestClient.post()
                 .uri("/issue")
                 .bodyValue(request)
                 .exchange()
-                .expectStatus().isEqualTo(HttpStatus.CONFLICT)
-                .expectBody(Issue.class)
-                .returnResult()
-                .getResponseBody();
+                .expectStatus().isEqualTo(HttpStatus.CONFLICT);
     }
 
     @Test
@@ -198,14 +195,11 @@ public class IssueControllerTest extends TestSpringBootBase {
         Long readerId = readerRepository.findAll().stream().findFirst().get().getId();
         TestIssueSave request = new TestIssueSave(bookId + 1, readerId);
 
-        Issue responseBody = webTestClient.post()
+        webTestClient.post()
                 .uri("/issue")
                 .bodyValue(request)
                 .exchange()
-                .expectStatus().isNotFound()
-                .expectBody(Issue.class)
-                .returnResult()
-                .getResponseBody();
+                .expectStatus().isNotFound();
     }
 
     @Test
