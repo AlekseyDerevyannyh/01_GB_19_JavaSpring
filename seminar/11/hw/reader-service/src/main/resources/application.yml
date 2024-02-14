@@ -7,3 +7,7 @@ eureka:
 spring:
   application:
     name: reader-service
+aspect:
+  timer:
+    enabled: true
+    microseconds: true

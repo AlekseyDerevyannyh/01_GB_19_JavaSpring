@@ -1,5 +1,6 @@
 package ru.gb.api;
 
+import com.gb.annotation.Timer;
 import com.github.javafaker.Faker;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +30,13 @@ public class ReaderController {
         this.readers = List.copyOf(readers);
     }
 
+    @Timer
     @GetMapping
     public List<Reader> getAll() {
         return readers;
     }
 
+    @Timer
     @GetMapping("/random")
     public Reader getRandom() {
         final int randomIndex = faker.number().numberBetween(0, readers.size());

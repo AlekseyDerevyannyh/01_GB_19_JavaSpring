@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.gb.api.Book;
 
-import java.util.UUID;
-
 @Service
 public class BookProvider {
 

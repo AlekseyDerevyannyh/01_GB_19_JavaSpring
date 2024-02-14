@@ -7,3 +7,7 @@ eureka:
 spring:
   application:
     name: book-service
+aspect:
+  timer:
+    enabled: true
+    microseconds: true
